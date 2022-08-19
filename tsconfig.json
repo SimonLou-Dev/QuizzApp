@@ -8,6 +8,9 @@
         "sourceMap": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "useDefineForClassFields": true,
         "lib": [
             "esnext",
             "dom"
