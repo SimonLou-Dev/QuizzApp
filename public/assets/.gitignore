@@ -1,0 +1,4 @@
+*.js
+*.css
+*.json
+!.gitignore

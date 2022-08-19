@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <!DOCTYPE>
+=======
+<!DOCTYPE html>
+>>>>>>> prod
 <html lang="{{str_replace('_','-', app()->getLocale())}}">
 <head>
 
@@ -36,7 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     <!--End META -->
 
     <!--Vite Assets-->
+<<<<<<< HEAD
     {!! Vite::asset('/js/App.jsx', ["react"])  !!}
+=======
+    {!! Vite::asset('/js/App.tsx', ["react"])  !!}
+>>>>>>> prod
     <!-- End Vite Assets -->
 
 
