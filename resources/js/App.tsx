@@ -1,21 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
+import '../sass/App.scss';
+import {TextInput} from "./Components/Inputs/TextInput";
 
 
+export const App: React.FC = () => {
+    const [test, setTest] = useState('');
 
-class App extends React.Component{
+    return(
+        <TextInput type={'text'} value={test} mode={'normal'} onChange={(e)=>{setTest(e.currentTarget.value)}}/>
+    )
 
-
-
-    render() {
-        console.log("Salut")
-        return(
-            <h1>Salut</h1>
-        )
-    }
 }
 
-export default App;
 if (document.getElementById('App')) {
     ReactDOM.render(<App/>, document.getElementById('App'));
 }

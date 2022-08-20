@@ -1,0 +1,38 @@
+/**  Color definition - Background**/
+$BGPrimary: #191E29;
+$BGPrimaryShade: #4DD5AF;
+$BGSecondary: #0F273D;
+$BGSecondaryShade: #4DD5AF;
+
+/**  Color definition - Color & element**/
+$primary: #01C38D;
+$primaryShade: #018963;
+$primaryTint: #4DD5AF;
+
+$secondary: #D6D2D2;
+$tertiary: #696E79;
+
+/**  Color definition - Base Color**/
+$wrong: #CC0000;
+$right: #00CC00;
+$danger: #FF8F00;
+
+/**  Font definition **/
+@font-face {
+    font-family: 'TT Commons';
+    font-weight: normal;
+    src: url('/assets/fonts/TTCommonsRegular.otf');
+}
+
+@font-face {
+    font-family: 'TT Commons DB';
+    font-weight: normal;
+    src: url('/assets/fonts/TTCommonsDemiBold.otf');
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}

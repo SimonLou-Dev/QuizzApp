@@ -85,16 +85,12 @@ class ViteAssetLoader
 
         $url = trim($url, '/');
         $file = $this->manifestData[$url]['file'] ?: null;
-<<<<<<< HEAD
-        $cssFiles= $this->manifestData[$url]['css'] ?: [];
-=======
         if(isset($this->manifestData[$url]['css'])){
             $cssFiles= $this->manifestData[$url]['css'] ?: [];
         }else{
             $cssFiles = [];
         }
 
->>>>>>> prod
         if($file == null){
             return '';
         }
