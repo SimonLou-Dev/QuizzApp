@@ -1,6 +1,7 @@
 @import "var";
 /** Component Styling **/
 
+//Text input cmpnt
 .text-input{
     height: 50px;
     width: 90%;
@@ -49,6 +50,101 @@
 
 }
 
+//Quizz Results cmpnt
+.quizz-result-item{
+    background-color: $BGSecondary;
+    width: 90%;
+    margin: 5px;
+    border-radius: 10px;
+    .quizz-result-item-title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: 100%;
+        height: 60px;
+        h2{
+            margin: auto 0;
+            padding-left: 10px;
+            width: 80%;
+            font-family: 'TT Commons';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            color: #fff;
+            overflow: hidden;
+        }
+        button{
+            cursor: pointer;
+            border-radius: 20px;
+            margin: auto 10px auto 0;
+            background-color: $BGPrimary;
+            border: none;
+            width: 60px;
+            height: 50px;
+            display: flex;
+            img{
+                margin: auto;
+                width: 80%;
+                height: auto;
+            }
+            &:hover{
+                background-color: $BGPrimaryShade;
+            }
+        }
+    }
+    .quizz-result-item-data{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: calc(100% - 20px);
+        padding: 0 10px 10px 10px;
+        .quizz-result-item-data-infos{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 37px;
+            h6{
+                margin: 0;
+                font-family: 'TT Commons';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 12px;
+            }
+            span{
+                font-family: 'TT Commons DB';
+            }
+        }
+        .results-later{
+            color: $danger;
+        }
+        .realisedAt{
+            color: $tertiary
+        }
+        .results-now{
+            color: $primary;
+        }
+        .quizz-result-item-data-score{
+            h6{
+                font-family: 'TT Commons DB';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                margin: 0;
+                color: $BGSecondary;
+            }
+            .wrong{
+                color: $wrong;
+            }
+            .ok{
+                color: $primary;
+            }
+        }
+    }
+}
 
 
 
