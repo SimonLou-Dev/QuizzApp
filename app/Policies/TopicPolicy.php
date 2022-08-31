@@ -10,32 +10,22 @@ class TopicPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
-    {
-
-    }
-
-    public function view(User $user, Topic $topic): bool
-    {
-    }
-
-    public function create(User $user): bool
-    {
-    }
-
     public function update(User $user, Topic $topic): bool
     {
+        if ($user->id == $topic->user_id) {
+            return true;
+        }
+
+        return false;
     }
 
     public function delete(User $user, Topic $topic): bool
     {
+        if ($user->id == $topic->user_id || $user->role == 'admin') {
+            return true;
+        }
+
+        return false;
     }
 
-    public function restore(User $user, Topic $topic): bool
-    {
-    }
-
-    public function forceDelete(User $user, Topic $topic): bool
-    {
-    }
 }

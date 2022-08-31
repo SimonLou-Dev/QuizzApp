@@ -21,6 +21,7 @@ class AuthController extends Controller
         $user->password = \Hash::make($request->validated('password'));
         $user->name = $request->validated('name');
         $user->save();
+        $user = User::where('email', $request->validated('email'))->first();
         $token = $user->createToken(DeviceDetection::getDeviceName($request))->plainTextToken;
 
 

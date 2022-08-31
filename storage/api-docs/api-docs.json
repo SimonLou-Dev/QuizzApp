@@ -52,18 +52,71 @@
                                 },
                                 "type": "object"
                             }
-                        },
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "user": {
-                                        "$ref": "#/components/schemas/User"
-                                    }
-                                    "token": {
-                                        "type": "string"
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
                                     }
                                 }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user and issuing token",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -72,8 +125,410 @@
                     "201": {
                         "description": "Successful operation",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
                         }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Get current user and his token",
+                "operationId": "get user",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "tokens": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Token"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "delete user and all tokens",
+                "operationId": "deleteAccount",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "delete": {
+                "tags": [
+                    "Auth"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "delete token for device and logout",
+                "operationId": "logout",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/topic": {
+            "post": {
+                "tags": [
+                    "Topic"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Create new topic",
+                "operationId": "create topic",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "random_order",
+                                    "display_result",
+                                    "timed",
+                                    "correction_available",
+                                    "can_retry",
+                                    "negative_point",
+                                    "public",
+                                    "timer",
+                                    "ended_at"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "random_order": {
+                                        "type": "boolean"
+                                    },
+                                    "display_result": {
+                                        "type": "boolean"
+                                    },
+                                    "timed": {
+                                        "type": "string",
+                                        "description": "values ares : false, question, topic"
+                                    },
+                                    "correction_available": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "timer": {
+                                        "type": "integer"
+                                    },
+                                    "can_retry": {
+                                        "type": "boolean"
+                                    },
+                                    "negative_point": {
+                                        "type": "boolean"
+                                    },
+                                    "public": {
+                                        "type": "boolean"
+                                    },
+                                    "ended_at": {
+                                        "type": "string",
+                                        "format": "datetime"
+                                    }
+
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "topic": {
+                                            "$ref": "#/components/schemas/Topic"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/topic/{code}": {
+            "put": {
+                "tags": [
+                    "Topic"
+                ],
+                "security": [
+                    {
+                        "Bearer": ["*"]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Topic code"
+                    }
+                ],
+                "summary": "Update topic",
+                "operationId": "Update Topic",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "random_order",
+                                    "display_result",
+                                    "timed",
+                                    "correction_available",
+                                    "can_retry",
+                                    "negative_point",
+                                    "public"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "random_order": {
+                                        "type": "boolean"
+                                    },
+                                    "display_result": {
+                                        "type": "boolean"
+                                    },
+                                    "timed": {
+                                        "type": "string",
+                                        "description": "values ares : false, question, topic"
+                                    },
+                                    "correction_available": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "timer": {
+                                        "type": "integer"
+                                    },
+                                    "can_retry": {
+                                        "type": "boolean"
+                                    },
+                                    "negative_point": {
+                                        "type": "boolean"
+                                    },
+                                    "public": {
+                                        "type": "boolean"
+                                    },
+                                    "ended_at": {
+                                        "type": "string",
+                                        "format": "datetime"
+                                    }
+
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "topic": {
+                                            "$ref": "#/components/schemas/Topic"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Topic"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Topic code"
+                    }
+                ],
+                "summary": "delete Topic",
+                "operationId": "delete Topic",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
                     },
                     "401": {
                         "description": "Unauthenticated"
@@ -93,6 +548,13 @@
     },
     "components": {
         "schemas": {
+            "securitySchemes ": {
+                "Bearer": {
+                    "type": "apiKey",
+                    "name": "Authorization",
+                    "in": "header"
+                }
+            },
             "User": {
                 "type": "object",
                 "properties": {
@@ -105,6 +567,105 @@
                     },
                     "email": {
                         "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "datetime"
+                    }
+                }
+            },
+            "Token": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "expires_at": {
+                        "type": "string"
+                    },
+                    "last_used_at": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Topic": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "code": {
+                        "type": "string",
+                        "format": "XXXXXX"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "random_order": {
+                        "type": "boolean"
+                    },
+                    "display_result": {
+                        "type": "boolean"
+                    },
+                    "timed": {
+                        "type": "string",
+                        "description": "values ares : false, question, topic"
+                    },
+                    "correction_available": {
+                        "type": "string"
+                    },
+                    "can_retry": {
+                        "type": "boolean"
+                    },
+                    "negative_point": {
+                        "type": "boolean"
+                    },
+                    "public": {
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "max_note": {
+                        "type": "integer"
+                    },
+                    "success_rate": {
+                        "type": "integer"
+                    },
+                    "nbr_question": {
+                        "type": "integer"
+                    },
+                    "timer": {
+                        "type": "integer"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "validate": {
+                        "type": "boolean"
+                    },
+                    "validated_by": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "ended_at": {
+                        "type": "string",
+                        "format": "datetime"
                     }
                 }
             }

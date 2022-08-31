@@ -227,7 +227,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Vite'=>\App\Facade\ViteFacade::class
+        'Vite'=>\App\Facade\ViteFacade::class,
+        'Notify'=>\App\Facade\Notify::class,
+        "Code"=>\App\Facade\Code::class,
 
     ],
 

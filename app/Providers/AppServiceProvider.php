@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use App\Blade\ViteAssetLoader;
+use App\Facade\Code;
+use App\Facade\Notify;
 use App\Models\PersonalAccessToken;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -24,6 +27,14 @@ class AppServiceProvider extends ServiceProvider
                 $app->get('cache.store')
             );
         });
+
+        $this->app->singleton(Notify::class, function (Application $app){
+            return new Notify();
+        });
+
+        $this->app->singleton(Code::class, function (Application $app){
+            return new Code();
+        });
     }
 
     /**
@@ -34,5 +45,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        Validator::extend('extended_boolean', 'App\Rules\ExtendedBoolean@passes');
     }
 }

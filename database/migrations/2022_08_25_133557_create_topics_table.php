@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('topics', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable()->default(null);
             $table->mediumText('description')->nullable();
             $table->integer('max_note')->default(0);
             $table->integer('success_rate')->default(100);
