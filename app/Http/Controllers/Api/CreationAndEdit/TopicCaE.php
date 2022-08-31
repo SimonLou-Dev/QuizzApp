@@ -11,6 +11,7 @@ use App\Models\Topic;
 
 class TopicCaE extends Controller
 {
+
     public function createTopic(CreateValidatorRequest $request)
     {
 
