@@ -36,14 +36,6 @@ Route::group(['middleware' => 'throttle:api'], function (){
         Route::get('/search', [TopicListController::class, 'search']);
     });
 
-    Route::middleware('authSanctum')->get('/force', function (Request $request){
-            for ($i = 0; $i < 59; $i++){
-                \Illuminate\Support\Facades\RateLimiter::hit($request->user()->id);
-            }
-            return response()->json(['message' => 'ok']);
-    });
-
-
 });
 
 

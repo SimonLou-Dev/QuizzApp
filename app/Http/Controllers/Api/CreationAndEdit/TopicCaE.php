@@ -27,6 +27,7 @@ class TopicCaE extends Controller
         $topic->public = (bool)$request->validated('public');
         $topic->ended_at = $request->validated('ended_at');
         $topic->user_id = $request->user()->id;
+        $topic->timer = $request->validated('timer');
         $topic->save();
 
         $date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' - 5 seconds'));
@@ -46,7 +47,6 @@ class TopicCaE extends Controller
 
     public function updateTopic(string $code, UpdateValidatorRequest $request)
     {
-        dd('ici');
 
         $topic = Topic::where('code', $code)->first();
 
@@ -63,6 +63,7 @@ class TopicCaE extends Controller
         $topic->public = (bool)$request->validated('public');
         $topic->ended_at = $request->validated('ended_at');
         $topic->user_id = $request->user()->id;
+        $topic->timer = $request->validated('timer');
         $topic->save();
 
         return response()->json([
